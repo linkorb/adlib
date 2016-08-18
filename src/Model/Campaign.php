@@ -4,8 +4,13 @@ namespace AdLib\Model;
 
 class Campaign
 {
+    protected $id;
     protected $name;
     protected $mode;
+    
+    protected $width;
+    protected $height;
+    
     protected $priority;
     protected $comment;
     protected $flightStart;
@@ -25,6 +30,20 @@ class Campaign
     protected $criteria = [];
     protected $frequencyCaps = [];
     protected $creatives = [];
+    
+    protected $excluder = null;
+    
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+    
     
     public function getName()
     {
@@ -47,6 +66,29 @@ class Campaign
         $this->mode = $mode;
         return $this;
     }
+    
+    public function getWidth()
+    {
+        return $this->width;
+    }
+    
+    public function setWidth($width)
+    {
+        $this->width = $width;
+        return $this;
+    }
+    
+    public function getHeight()
+    {
+        return $this->height;
+    }
+    
+    public function setHeight($height)
+    {
+        $this->height = $height;
+        return $this;
+    }
+    
     
     public function getPriority()
     {
@@ -221,4 +263,17 @@ class Campaign
     {
         return $this->creatives;
     }
+    
+    
+    public function getExcluder()
+    {
+        return $this->excluder;
+    }
+    
+    public function setExcluder($excluder)
+    {
+        $this->excluder = $excluder;
+        return $this;
+    }
+    
 }

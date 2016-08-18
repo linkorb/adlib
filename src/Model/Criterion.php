@@ -4,21 +4,9 @@ namespace AdLib\Model;
 
 class Criterion
 {
-    protected $type; // zone, browser, profile, ...
     protected $key;
     protected $match; // 'equals', 'not-equals', 'greater than'
     protected $value;
-    
-    public function getType()
-    {
-        return $this->type;
-    }
-    
-    public function setType($type)
-    {
-        $this->type = $type;
-        return $this;
-    }
     
     public function getKey()
     {

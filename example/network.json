@@ -1,0 +1,20 @@
+{
+    "name": "Example network",
+    "sizes": [
+        {
+            "name": "320x50",
+            "width": 320,
+            "height": 50
+        }
+    ],
+    "properties": [
+        {
+            "key": "gender",
+            "type": "pre-defined",
+            "values": [
+                "male",
+                "female"
+            ]
+        }
+    ]
+}

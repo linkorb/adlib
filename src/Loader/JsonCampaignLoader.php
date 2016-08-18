@@ -6,6 +6,8 @@ use AdLib\Model\Campaign;
 use AdLib\Model\Criterion;
 use AdLib\Model\FrequencyCap;
 use AdLib\Model\Creative;
+use DateTime;
+use DateTimeZone;
 
 use RuntimeException;
 
@@ -26,11 +28,16 @@ class JsonCampaignLoader
         $campaign = new Campaign();
         $campaign->setName($data['name']);
         $campaign->setMode($data['mode']);
+        $campaign->setWidth($data['width']);
+        $campaign->setHeight($data['height']);
         $campaign->setPriority($data['priority']);
         $campaign->setComment($data['comment']);
         
-        $campaign->setFlightStart($data['flight']['start']);
-        $campaign->setFlightEnd($data['flight']['end']);
+        $tz = new DateTimeZone($data['flight']['timezone']);
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $data['flight']['start'], $tz);
+        $campaign->setFlightStart($date->getTimestamp());
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $data['flight']['end'], $tz);
+        $campaign->setFlightEnd($date->getTimestamp());
         $campaign->setFlightTimezone($data['flight']['timezone']);
         
         $campaign->setGoalQuantity($data['goal']['quantity']);
@@ -46,7 +53,6 @@ class JsonCampaignLoader
         
         foreach ($data['criteria'] as $cdata) {
             $criterion = new Criterion();
-            $criterion->setType($cdata['type']);
             $criterion->setKey($cdata['key']);
             $criterion->setMatch($cdata['match']);
             $criterion->setValue($cdata['value']);

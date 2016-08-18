@@ -1,15 +1,16 @@
 {
-  "name": "Mobile Leaderboard 320x50",
+  "name": "Leaderboard 1 320x50",
   "advertiser": "Acme Corp",
   "trafficker": "Joe Johnson",
   "labels": ["one", "two"],
   "teams": ["green", "blue"],
   "comment": "Lorum ipsum",
-  "sizes": ["320x50"],
+  "width": 320,
+  "height": 50,
   "priority": 8,
   "mode": "absolute",
   "flight": {
-    "timezone": "UTC +1",
+    "timezone": "Europe/Amsterdam",
     "start": "2016-01-01 12:30:00",
     "end": "2016-12-31 12:30:00"
   },
@@ -29,16 +30,14 @@
   },
   "criteria": [
     {
-      "type": "browser",
-      "key": "name",
+      "key": "browser.name",
       "match": "equals",
       "value": "chrome"
     },
     {
-      "type": "profile",
-      "key": "gender",
+      "key": "profile.gender",
       "match": "equals",
-      "value": ["m", "f"]
+      "value": ["f", "m"]
     }
   ],
   "frequency-caps": [
