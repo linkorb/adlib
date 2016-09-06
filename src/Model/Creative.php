@@ -7,7 +7,7 @@ class Creative
     protected $name; 
     protected $type; // image
     protected $url;
-    protected $target; // target url
+    protected $targetUrl; // target url
     protected $weight; // compaired to other creatives in the same campaign
     protected $width;
     protected $height;
@@ -45,14 +45,14 @@ class Creative
         return $this;
     }
     
-    public function getTarget()
+    public function getTargetUrl()
     {
-        return $this->target;
+        return $this->targetUrl;
     }
     
-    public function setTarget($target)
+    public function setTargetUrl($targetUrl)
     {
-        $this->target = $target;
+        $this->targetUrl = $targetUrl;
         return $this;
     }
     

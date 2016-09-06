@@ -27,11 +27,11 @@ class JsonCampaignLoader
     {
         $campaign = new Campaign();
         $campaign->setName($data['name']);
-        $campaign->setMode($data['mode']);
+        //$campaign->setMode($data['mode']);
         $campaign->setWidth($data['width']);
         $campaign->setHeight($data['height']);
         $campaign->setPriority($data['priority']);
-        $campaign->setComment($data['comment']);
+        $campaign->setNotes($data['notes']);
         
         $tz = new DateTimeZone($data['flight']['timezone']);
         $date = DateTime::createFromFormat('Y-m-d H:i:s', $data['flight']['start'], $tz);
@@ -51,33 +51,39 @@ class JsonCampaignLoader
         $campaign->setRateDiscountAmount($data['rate']['discount']['amount']);
         $campaign->setRateDiscountType($data['rate']['discount']['type']);
         
-        foreach ($data['criteria'] as $cdata) {
-            $criterion = new Criterion();
-            $criterion->setKey($cdata['key']);
-            $criterion->setMatch($cdata['match']);
-            $criterion->setValue($cdata['value']);
-            $campaign->addCriterion($criterion);
+        if (isset($data['criteria'])) {
+            foreach ($data['criteria'] as $cdata) {
+                $criterion = new Criterion();
+                $criterion->setKey($cdata['key']);
+                $criterion->setMatch($cdata['match']);
+                $criterion->setValue($cdata['value']);
+                $campaign->addCriterion($criterion);
+            }
         }
         
-        foreach ($data['frequency-caps'] as $cdata) {
-            $cap = new FrequencyCap();
-            $cap->setType($cdata['type']);
-            $cap->setImpressions($cdata['impressions']);
-            $cap->setSpan($cdata['span']);
-            $cap->setUnit($cdata['unit']);
-            $campaign->addFrequencyCap($cap);
+        if (isset($data['frequency-caps'])) {
+            foreach ($data['frequency-caps'] as $cdata) {
+                $cap = new FrequencyCap();
+                $cap->setType($cdata['type']);
+                $cap->setImpressions($cdata['impressions']);
+                $cap->setSpan($cdata['span']);
+                $cap->setUnit($cdata['unit']);
+                $campaign->addFrequencyCap($cap);
+            }
         }
         
-        foreach ($data['creatives'] as $cdata) {
-            $creative = new Creative();
-            $creative->setName($cdata['name']);
-            $creative->setType($cdata['type']);
-            $creative->setUrl($cdata['url']);
-            $creative->setTarget($cdata['target']);
-            $creative->setWeight($cdata['weight']);
-            $creative->setWidth($cdata['width']);
-            $creative->setHeight($cdata['height']);
-            $campaign->addCreative($creative);
+        if (isset($data['creatives'])) {
+            foreach ($data['creatives'] as $cdata) {
+                $creative = new Creative();
+                $creative->setName($cdata['name']);
+                $creative->setType($cdata['type']);
+                $creative->setUrl($cdata['url']);
+                $creative->setTargetUrl($cdata['targetUrl']);
+                $creative->setWeight($cdata['weight']);
+                $creative->setWidth($cdata['width']);
+                $creative->setHeight($cdata['height']);
+                $campaign->addCreative($creative);
+            }
         }
         
         return $campaign;

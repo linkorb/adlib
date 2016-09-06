@@ -6,13 +6,12 @@ class Campaign
 {
     protected $id;
     protected $name;
-    protected $mode;
     
     protected $width;
     protected $height;
     
     protected $priority;
-    protected $comment;
+    protected $notes;
     protected $flightStart;
     protected $flightEnd;
     protected $flightTimezone;
@@ -101,14 +100,14 @@ class Campaign
         return $this;
     }
     
-    public function getComment()
+    public function getNotes()
     {
-        return $this->comment;
+        return $this->notes;
     }
     
-    public function setComment($comment)
+    public function setNotes($notes)
     {
-        $this->comment = $comment;
+        $this->notes = $notes;
         return $this;
     }
     
