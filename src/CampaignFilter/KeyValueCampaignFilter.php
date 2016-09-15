@@ -5,11 +5,12 @@ namespace AdLib\CampaignFilter;
 use AdLib\Model\Campaign;
 use AdLib\Model\Request;
 use AdLib\Model\Criterion;
+use AdLib\Model\Zone;
 use RuntimeException;
 
 class KeyValueCampaignFilter implements CampaignFilterInterface
 {
-    public function filter(Campaign $campaign, Request $request)
+    public function filter(Campaign $campaign, Request $request, Zone $zone)
     {
         $stamp = $request->getTimestamp();
         

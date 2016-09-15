@@ -4,6 +4,7 @@ namespace AdLib\CampaignFilter;
 
 use AdLib\Model\Campaign;
 use AdLib\Model\Request;
+use AdLib\Model\Zone;
 
 class ImpressionCampaignFilter implements CampaignFilterInterface
 {
@@ -16,7 +17,7 @@ class ImpressionCampaignFilter implements CampaignFilterInterface
         $this->impressions = $this->impressionRepository->getImpressionsPerCampaign();
     }
     
-    public function filter(Campaign $campaign, Request $request)
+    public function filter(Campaign $campaign, Request $request, Zone $zone)
     {
         if ($campaign->getGoalType() != 'impressions') {
             return true;

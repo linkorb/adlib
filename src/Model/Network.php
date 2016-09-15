@@ -5,11 +5,14 @@ namespace AdLib\Model;
 use AdLib\CampaignFilter\CampaignFilterInterface;
 use AdLib\CampaignSelector\CampaignSelectorInterface;
 use AdLib\CreativeSelector\CreativeSelectorInterface;
+use AdLib\Model\Zone;
+use RuntimeException;
 
 class Network
 {
     protected $name;
     protected $campaigns = [];
+    protected $zones = [];
     protected $filters = [];
     protected $campaignSelector;
     
@@ -34,6 +37,29 @@ class Network
         return $this->campaigns;
     }
     
+    public function addZone(Zone $zone)
+    {
+        $this->zones[$zone->getId()] = $zone;
+    }
+    
+    public function getZones()
+    {
+        return $this->zones;
+    }
+    
+    public function hasZone($id)
+    {
+        return isset($this->zones[$id]);
+    }
+    
+    public function getZone($id)
+    {
+        if (!$this->hasZone($id)) {
+            throw new RuntimeException("No such zone id: " . $id);
+        }
+        return $this->zones[$id];
+    }
+    
     public function addCampaignFilter(CampaignFilterInterface $campaignFilter)
     {
         $this->campaignFilters[] = $campaignFilter;
@@ -54,7 +80,7 @@ class Network
         $this->creativeSelector = $creativeSelector;
     }
     
-    public function process(Request $request)
+    public function process(Request $request, Zone $zone)
     {
         $response = new Response();
 
@@ -62,7 +88,7 @@ class Network
             $include = true;
             foreach ($this->campaignFilters as $campaignFilter) {
                 if ($include) {
-                    if (!$campaignFilter->filter($campaign, $request)) {
+                    if (!$campaignFilter->filter($campaign, $request, $zone)) {
                         $exclude = new Exclude();
                         $exclude->setCampaign($campaign);
                         $exclude->setFilter(get_class($campaignFilter));
