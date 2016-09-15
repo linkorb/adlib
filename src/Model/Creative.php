@@ -91,5 +91,24 @@ class Creative
         return $this;
     }
     
-    
+    public function getHtml($fullWidth = false)
+    {
+        $o = '';
+        $o .= "<a class=\"adlib-ad ";
+        if ($fullWidth) {
+            $o .= "adlib-fullwidth";
+        }
+        $o .= "\" border=0 href=\"" . $this->getTargetUrl() . "\">";
+        $o .= "<img src=\"" . $this->getUrl() . "\"";
+        $o .= " style=\"";
+        if ($fullWidth) {
+            $o .= " width: 100%;";
+        } else {
+            $o .= " width: " . $this->getWidth() . "px;";
+            $o .= " height: " . $this->getHeight() . "px;";
+        }
+        $o .= "\" />";
+        $o .= "</a>";
+        return $o;
+    }
 }
