@@ -28,12 +28,19 @@ class JsonCampaignLoader
         $campaign = new Campaign();
         $campaign->setName($data['name']);
         //$campaign->setMode($data['mode']);
-        $campaign->setWidth($data['width']);
-        $campaign->setHeight($data['height']);
+        if (isset($data['width'])) {
+            $campaign->setWidth($data['width']);
+        }
+        if (isset($data['height'])) {
+            $campaign->setHeight($data['height']);
+        }
         $campaign->setPriority($data['priority']);
-        $campaign->setNotes($data['notes']);
+        if (isset($data['notes'])) {
+            $campaign->setNotes($data['notes']);
+        }
         
         $tz = new DateTimeZone($data['flight']['timezone']);
+        //exit($data['flight']['start']);
         $date = DateTime::createFromFormat('Y-m-d H:i:s', $data['flight']['start'], $tz);
         $campaign->setFlightStart($date->getTimestamp());
         $date = DateTime::createFromFormat('Y-m-d H:i:s', $data['flight']['end'], $tz);
@@ -55,7 +62,7 @@ class JsonCampaignLoader
             foreach ($data['criteria'] as $cdata) {
                 $criterion = new Criterion();
                 $criterion->setKey($cdata['key']);
-                $criterion->setMatch($cdata['match']);
+                $criterion->setMatch($cdata['operator']);
                 $criterion->setValue($cdata['value']);
                 $campaign->addCriterion($criterion);
             }

@@ -21,8 +21,12 @@ class JsonZoneLoader
     {
         $zone = new Zone();
         $zone->setName($data['name']);
-        $zone->setWidth($data['width']);
-        $zone->setHeight($data['height']);
+        if (isset($data['width'])) {
+            $zone->setWidth($data['width']);
+        }
+        if (isset($data['height'])) {
+            $zone->setHeight($data['height']);
+        }
         if (isset($data['comment'])) {
             $zone->setComment($data['comment']);
         }

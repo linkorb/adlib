@@ -17,7 +17,7 @@ class JsonZoneRepository
     {
         $files = glob($this->path . '/*.json');
         $loader = new JsonZoneLoader();
-        $campaigns = [];
+        $zones = [];
         foreach ($files as $filename) {
             $zone = $loader->loadFile($filename);
             //$id = substr($filename, strlen($this->path)+1, -5); // extract ID from filename
