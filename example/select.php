@@ -50,15 +50,12 @@ foreach ($campaigns as $campaign) {
 }
 
 $request = new Request();
-$request->setSessionId(1);
+$request->setId('23422424242232');
+$request->setSessionId('3kjhdkjh3hkj4');
 $request->setTimestamp(time());
 $request->setProperty('browser.name', 'chrome');
 $request->setProperty('profile.gender', 'f');
 $request->setProperty('profile.age', '25');
-/*
-$request->setWidth(320);
-$request->setHeight(50);
-*/
 
 $slot = new Slot();
 $slot->setZone($zone1);
@@ -108,5 +105,6 @@ foreach ($request->getSlots() as $slot) {
         echo "Creative: " . $creative->getName() . "\n";
     }
 }
+$impressionRepo->saveRequest($request);
 //print_r($campaign);
 exit();

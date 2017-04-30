@@ -10,13 +10,11 @@ class Request
     protected $sessionId;
     protected $userId;
     protected $timestamp;
+    protected $slots = [];
 
     use PropertyTrait;
 
-    protected $slots = [];
 
-    protected $width;
-    protected $height;
 
     public function setId($id)
     {
