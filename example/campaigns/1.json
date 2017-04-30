@@ -30,7 +30,7 @@
     {
       "key": "browser.name",
       "operator": "equals",
-      "value": "chrome"
+      "value": ["chrome", "firefox"]
     },
     {
       "key": "profile.gender",
