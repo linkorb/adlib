@@ -2,7 +2,7 @@
   "name": "Leaderboard 2 320x50",
   "advertiser": "Acme Corp",
   "trafficker": "Jack Jackson",
-  "comment": "No comment",
+  "notes": "No comment",
   "width": 320,
   "height": 50,
   "priority": 7,
@@ -10,7 +10,7 @@
   "flight": {
     "timezone": "Europe/Amsterdam",
     "start": "2016-01-01 12:30:00",
-    "end": "2016-12-31 12:30:00"
+    "end": "2017-12-31 12:30:00"
   },
   "goal": {
     "quantity": 30000,
@@ -29,12 +29,12 @@
   "criteria": [
     {
       "key": "browser.name",
-      "match": "equals",
+      "operator": "equals",
       "value": "chrome"
     },
     {
       "key": "profile.gender",
-      "match": "equals",
+      "operator": "equals",
       "value": "f"
     }
   ],
@@ -57,7 +57,7 @@
       "name": "creative-3",
       "type": "image",
       "url": "https://upr.io/example3.png",
-      "target": "http://test3.example.com",
+      "targetUrl": "http://test3.example.com",
       "weight": 20,
       "width": 320,
       "height": 50
@@ -66,7 +66,7 @@
       "name": "creative-4",
       "type": "image",
       "url": "https://upr.io/example4.png",
-      "target": "http://test4.example.com",
+      "targetUrl": "http://test4.example.com",
       "weight": 10,
       "width": 320,
       "height": 50

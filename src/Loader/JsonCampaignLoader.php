@@ -22,7 +22,7 @@ class JsonCampaignLoader
         }
         return $this->load($data);
     }
-    
+
     public function load($data)
     {
         $campaign = new Campaign();
@@ -38,7 +38,7 @@ class JsonCampaignLoader
         if (isset($data['notes'])) {
             $campaign->setNotes($data['notes']);
         }
-        
+
         $tz = new DateTimeZone($data['flight']['timezone']);
         //exit($data['flight']['start']);
         $date = DateTime::createFromFormat('Y-m-d H:i:s', $data['flight']['start'], $tz);
@@ -46,18 +46,18 @@ class JsonCampaignLoader
         $date = DateTime::createFromFormat('Y-m-d H:i:s', $data['flight']['end'], $tz);
         $campaign->setFlightEnd($date->getTimestamp());
         $campaign->setFlightTimezone($data['flight']['timezone']);
-        
+
         $campaign->setGoalQuantity($data['goal']['quantity']);
         $campaign->setGoalType($data['goal']['type']);
         $campaign->setGoalMode($data['goal']['mode']);
-        
+
         $campaign->setRatePrice($data['rate']['price']);
         $campaign->setRateCurrency($data['rate']['currency']);
         $campaign->setRateType($data['rate']['type']);
-        
+
         $campaign->setRateDiscountAmount($data['rate']['discount']['amount']);
         $campaign->setRateDiscountType($data['rate']['discount']['type']);
-        
+
         if (isset($data['criteria'])) {
             foreach ($data['criteria'] as $cdata) {
                 $criterion = new Criterion();
@@ -67,7 +67,7 @@ class JsonCampaignLoader
                 $campaign->addCriterion($criterion);
             }
         }
-        
+
         if (isset($data['frequency-caps'])) {
             foreach ($data['frequency-caps'] as $cdata) {
                 $cap = new FrequencyCap();
@@ -78,7 +78,7 @@ class JsonCampaignLoader
                 $campaign->addFrequencyCap($cap);
             }
         }
-        
+
         if (isset($data['creatives'])) {
             foreach ($data['creatives'] as $cdata) {
                 $creative = new Creative();
@@ -92,7 +92,7 @@ class JsonCampaignLoader
                 $campaign->addCreative($creative);
             }
         }
-        
+
         return $campaign;
     }
 }
