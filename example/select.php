@@ -9,6 +9,7 @@ use AdLib\CampaignSelector\RandomCampaignSelector;
 use AdLib\CreativeSelector\RandomCreativeSelector;
 use AdLib\CampaignFilter\FlightCampaignFilter;
 use AdLib\CampaignFilter\SizeCampaignFilter;
+use AdLib\CampaignFilter\RequestUniqueCampaignFilter;
 use AdLib\CampaignFilter\PropertyCampaignFilter;
 use AdLib\CampaignFilter\FrequencyCapCampaignFilter;
 use AdLib\CampaignFilter\ImpressionCampaignFilter;
@@ -72,6 +73,7 @@ $campaigns = $network->getCampaigns();
 $network->addCampaignFilter(new FlightCampaignFilter());
 $network->addCampaignFilter(new SizeCampaignFilter());
 $network->addCampaignFilter(new PropertyCampaignFilter());
+$network->addCampaignFilter(new RequestUniqueCampaignFilter());
 
 $network->addCampaignFilter(new ImpressionCampaignFilter($impressionRepo));
 $network->addCampaignFilter(new FrequencyCapCampaignFilter($impressionRepo));
