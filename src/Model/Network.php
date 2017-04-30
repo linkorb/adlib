@@ -91,7 +91,7 @@ class Network
                             $exclude = new Exclude();
                             $exclude->setCampaign($campaign);
                             $exclude->setFilter(get_class($campaignFilter));
-                            $response->addExclude($exclude);
+                            $slot->addExclude($exclude);
                             $include = false;
                         }
                     }
