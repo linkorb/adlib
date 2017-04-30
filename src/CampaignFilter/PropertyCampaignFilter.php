@@ -40,14 +40,14 @@ class PropertyCampaignFilter implements CampaignFilterInterface
 
         $match = false;
         foreach ($values as $value) {
-            switch (strtolower($criterion->getMatch())) {
+            switch (strtolower($criterion->getOperator())) {
                 case 'equals':
                     if ($requestValue == $value) {
                         $match = true;
                     }
                     break;
                 default:
-                    throw new RuntimeException('Unsupported match type: ' . $request->getMatch());
+                    throw new RuntimeException('Unsupported match type: ' . $criterion->getOperator());
             }
         }
         return $match;

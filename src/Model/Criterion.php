@@ -5,36 +5,36 @@ namespace AdLib\Model;
 class Criterion
 {
     protected $key;
-    protected $match; // 'equals', 'not-equals', 'greater than'
+    protected $operator; // 'equals', 'not-equals', 'greater than'
     protected $value;
-    
+
     public function getKey()
     {
         return $this->key;
     }
-    
+
     public function setKey($key)
     {
         $this->key = $key;
         return $this;
     }
-    
-    public function getMatch()
+
+    public function getOperator()
     {
-        return $this->match;
+        return $this->operator;
     }
-    
-    public function setMatch($match)
+
+    public function setOperator($operator)
     {
-        $this->match = $match;
+        $this->operator = $operator;
         return $this;
     }
-    
+
     public function getValue()
     {
         return $this->value;
     }
-    
+
     public function setValue($value)
     {
         $this->value = $value;

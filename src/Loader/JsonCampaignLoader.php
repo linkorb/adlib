@@ -62,7 +62,7 @@ class JsonCampaignLoader
             foreach ($data['criteria'] as $cdata) {
                 $criterion = new Criterion();
                 $criterion->setKey($cdata['key']);
-                $criterion->setMatch($cdata['operator']);
+                $criterion->setOperator($cdata['operator']);
                 $criterion->setValue($cdata['value']);
                 $campaign->addCriterion($criterion);
             }
