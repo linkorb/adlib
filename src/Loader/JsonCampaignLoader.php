@@ -87,6 +87,7 @@ class JsonCampaignLoader
                 $creative->setName($cdata['name']);
                 $creative->setType($cdata['type']);
                 $creative->setUrl($cdata['url']);
+                $creative->setText($cdata['text']);
                 $creative->setTargetUrl($cdata['targetUrl']);
                 $creative->setWeight($cdata['weight']);
                 /*

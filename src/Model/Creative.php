@@ -7,6 +7,7 @@ class Creative
     protected $name;
     protected $type; // image
     protected $url;
+    protected $text;
     protected $targetUrl; // target url
     protected $weight; // compaired to other creatives in the same campaign
     /*
@@ -68,6 +69,16 @@ class Creative
     {
         $this->weight = $weight;
         return $this;
+    }
+
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    public function getText()
+    {
+        return $this->text;
     }
 
     /*
