@@ -11,8 +11,8 @@ class SizeCampaignFilter implements CampaignFilterInterface
     public function filter(Campaign $campaign, Slot $slot)
     {
         $zone = $slot->getZone();
-        if ($campaign->getWidth() == $zone->getWidth()) {
-            if ($campaign->getHeight() == $zone->getHeight()) {
+        if ((int)$campaign->getWidth() == (int)$zone->getWidth()) {
+            if ((int)$campaign->getHeight() == (int)$zone->getHeight()) {
                 return true;
             }
         }
