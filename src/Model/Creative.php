@@ -105,14 +105,19 @@ class Creative
     }
     */
 
+
+
     public function getHtml($fullWidth = false)
     {
-        $o = '';
-        $o .= "<a class=\"adlib-ad ";
+        $o = '<div class="ads">';
+        $o .= '<div class="row">';
+        $o .= '<div class="col-md-6">';
+
+        $o .= "<a class=\"xadlib-ad ";
         if ($fullWidth) {
-            $o .= "adlib-fullwidth";
+            $o .= "xadlib-fullwidth";
         }
-        $o .= "\" border=0 href=\"" . $this->getTargetUrl() . "\">";
+        $o .= "\" xborder=0 href=\"" . $this->getTargetUrl() . "\">";
         $o .= "<img src=\"" . $this->getUrl() . "\"";
         $o .= " style=\"";
         if ($fullWidth) {
@@ -123,6 +128,27 @@ class Creative
         }
         $o .= "\" />";
         $o .= "</a>";
+        $o .= '</div><div class="col-md-6">';
+        if ($this->getText()) {
+            $o .= '<div class="ad-text">';
+            $lines = explode("<br>", $this->getText());
+
+            $first = true;
+            foreach ($lines as $line) {
+                if ($first) {
+                    $o .= '<b>' . trim($line, "# ") . '</b>';
+                    $first = false;
+                } else {
+                    $o .= $line;
+                }
+                $o .= "<br />\n";
+            }
+            $o .= '</div>';
+        }
+        $o .= '</div>';
+        $o .= '</div>';
+        $o .= '</div>';
+        //$o .= $this->getText();
         return $o;
     }
 }
