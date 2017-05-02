@@ -3,8 +3,19 @@ namespace Adlib\Model;
 
 class Slot
 {
+    protected $id;
     protected $zone;
     protected $request;
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function setRequest(Request $request)
     {
