@@ -41,10 +41,12 @@ class JsonCampaignLoader
 
         $tz = new DateTimeZone($data['flight']['timezone']);
         //exit($data['flight']['start']);
-        $date = DateTime::createFromFormat('Y-m-d H:i:s', $data['flight']['start'], $tz);
+        $date = DateTime::createFromFormat('Y-m-d', $data['flight']['start'], $tz);
         $campaign->setFlightStart($date->getTimestamp());
-        $date = DateTime::createFromFormat('Y-m-d H:i:s', $data['flight']['end'], $tz);
-        $campaign->setFlightEnd($date->getTimestamp());
+        if ($data['flight']['end']) {
+            $date = DateTime::createFromFormat('Y-m-d', $data['flight']['end'], $tz);
+            $campaign->setFlightEnd($date->getTimestamp());
+        }
         $campaign->setFlightTimezone($data['flight']['timezone']);
 
         $campaign->setGoalQuantity($data['goal']['quantity']);
@@ -87,8 +89,10 @@ class JsonCampaignLoader
                 $creative->setUrl($cdata['url']);
                 $creative->setTargetUrl($cdata['targetUrl']);
                 $creative->setWeight($cdata['weight']);
+                /*
                 $creative->setWidth($cdata['width']);
                 $creative->setHeight($cdata['height']);
+                */
                 $campaign->addCreative($creative);
             }
         }
