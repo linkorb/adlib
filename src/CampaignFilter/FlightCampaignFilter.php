@@ -12,11 +12,17 @@ class FlightCampaignFilter implements CampaignFilterInterface
         $request = $slot->getRequest();
         $stamp = $request->getTimestamp();
 
-        if ($campaign->getFlightStart() < $stamp) {
-            if ($campaign->getFlightEnd() > $stamp) {
-                return true;
+        if ($campaign->getFlightStart()) {
+            if ($campaign->getFlightStart() > $stamp) {
+                return false;
             }
         }
-        return false;
+
+        if ($campaign->getFlightEnd()) {
+            if ($campaign->getFlightEnd() < $stamp) {
+                return false;
+            }
+        }
+        return true;
     }
 }
