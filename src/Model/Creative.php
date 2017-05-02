@@ -111,9 +111,9 @@ class Creative
     {
         $o = '<div class="ads">';
         $o .= '<div class="row">';
-        $o .= '<div class="col-md-6">';
+        $o .= '<div class="col-lg-6 col-sm-4">';
 
-        $o .= "<a class=\"xadlib-ad ";
+        $o .= "<a target=\"_blank\" rel=\"nofollow\" class=\"xadlib-ad ";
         if ($fullWidth) {
             $o .= "xadlib-fullwidth";
         }
@@ -128,10 +128,13 @@ class Creative
         }
         $o .= "\" />";
         $o .= "</a>";
-        $o .= '</div><div class="col-md-6">';
-        if ($this->getText()) {
+        $o .= '</div><div class="col-lg-6 col-sm-8">';
+        $text = $this->getText();
+
+        if ($text) {
             $o .= '<div class="ad-text">';
-            $lines = explode("<br>", $this->getText());
+            $text = str_replace('<br>', "\n", $text);
+            $lines = explode("\n", $text);
 
             $first = true;
             foreach ($lines as $line) {
