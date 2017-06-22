@@ -109,7 +109,7 @@ class Creative
 
     public function getHtml($fullWidth = false)
     {
-        $o = '<div class="ads">';
+        $o = '<div class="creatives">';
         $o .= '<div class="row">';
         $o .= '<div class="col-lg-6 col-sm-4">';
 
@@ -132,7 +132,7 @@ class Creative
         $text = $this->getText();
 
         if ($text) {
-            $o .= '<div class="ad-text">';
+            $o .= '<div class="text">';
             $text = str_replace('<br>', "\n", $text);
             $lines = explode("\n", $text);
 
