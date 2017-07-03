@@ -11,6 +11,7 @@ class Request
     protected $userId;
     protected $timestamp;
     protected $slots = [];
+    protected $categories = [];
 
     use PropertyTrait;
 
@@ -70,28 +71,29 @@ class Request
         return $this;
     }
 
-    /*
-    public function getWidth()
+    public function setCategory($category, $exclusivity)
     {
-        return $this->width;
+        if (!$category) {
+            return;
+        }
+        $this->categories[$category] = strtoupper($exclusivity);
     }
 
-    public function setWidth($width)
+    public function isCategoryAvailable($category)
     {
-        $this->width = $width;
-        return $this;
-    }
+        if (!$category) {
+            return true; // no category always allowed
+        }
 
-    public function getHeight()
-    {
-        return $this->height;
+        foreach ($this->categories as $key=>$value) {
+            if ($key==$category) {
+                if ($value=='Y') {
+                    // exclusive category used
+                    return false;
+                }
+            }
+        }
+        return true; // available
     }
-
-    public function setHeight($height)
-    {
-        $this->height = $height;
-        return $this;
-    }
-    */
 
 }

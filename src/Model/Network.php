@@ -80,9 +80,29 @@ class Network
         $this->creativeSelector = $creativeSelector;
     }
 
+    public function postFilter($request, $campaigns)
+    {
+        // Select based on priority, then use campaignselector for campaigns with same priority
+        for ($priority = 0; $priority < 16; $priority++) {
+            $prioCampaigns = [];
+            foreach ($campaigns as $campaign) {
+                if ($campaign->getPriority()==$priority) {
+                    if ($request->isCategoryAvailable($campaign->getCategory())) {
+                        $prioCampaigns[] = $campaign;
+                    }
+                }
+            }
+            if (count($prioCampaigns)>0) {
+                return $prioCampaigns;
+            }
+        }
+        return [];
+    }
+
     public function resolve(Request $request)
     {
         foreach ($request->getSlots() as $slot) {
+            // Prepare the slot with filtered campaigns
             foreach ($this->campaigns as $campaign) {
                 $include = true;
                 foreach ($this->campaignFilters as $campaignFilter) {
@@ -101,8 +121,11 @@ class Network
                 }
             }
 
-            $campaign = $this->campaignSelector->select($slot->getCandidates());
+            $prioCampaigns = $this->postFilter($request, $slot->getCandidates());
+            $campaign = $this->campaignSelector->select($prioCampaigns);
+
             if ($campaign) {
+                $request->setCategory($campaign->getCategory(), $campaign->getCategoryExclusivity());
                 $slot->setCampaign($campaign);
                 $slot->setCreative($this->creativeSelector->select($campaign));
             }

@@ -35,6 +35,13 @@ class JsonCampaignLoader
             $campaign->setHeight($data['height']);
         }
         $campaign->setPriority($data['priority']);
+        if (isset($data['category'])) {
+            $campaign->setCategory($data['category']);
+        }
+        if (isset($data['category_exclusivity'])) {
+            $campaign->setCategoryExclusivity($data['category_exclusivity']);
+        }
+
         if (isset($data['notes'])) {
             $campaign->setNotes($data['notes']);
         }

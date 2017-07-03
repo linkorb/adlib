@@ -11,6 +11,9 @@ class Campaign
     protected $height;
 
     protected $priority;
+    protected $category;
+    protected $category_exclusivity;
+
     protected $notes;
     protected $flightStart;
     protected $flightEnd;
@@ -29,6 +32,7 @@ class Campaign
     protected $criteria = [];
     protected $frequencyCaps = [];
     protected $creatives = [];
+
 
     protected $excluder = null;
 
@@ -96,6 +100,28 @@ class Campaign
     public function setPriority($priority)
     {
         $this->priority = $priority;
+        return $this;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory($category)
+    {
+        $this->category = $category;
+        return $this;
+    }
+
+    public function getCategoryExclusivity()
+    {
+        return $this->category_exclusivity;
+    }
+
+    public function setCategoryExclusivity($categoryExclusivity)
+    {
+        $this->category_exclusivity = $categoryExclusivity;
         return $this;
     }
 
