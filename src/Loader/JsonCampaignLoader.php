@@ -42,6 +42,13 @@ class JsonCampaignLoader
             $campaign->setCategoryExclusivity($data['category_exclusivity']);
         }
 
+        if (isset($data['expression'])) {
+            $campaign->setExpression($data['expression']['value'] ?? null);
+            if ($data['expression']['language']!='symfony') {
+                throw new RuntimeException("Unsupported expression language: " . $data['expression']['language']);
+            }
+        }
+
         if (isset($data['notes'])) {
             $campaign->setNotes($data['notes']);
         }

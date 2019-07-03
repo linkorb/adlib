@@ -13,6 +13,8 @@ class Campaign
     protected $priority;
     protected $category;
     protected $category_exclusivity;
+    protected $expression;
+    protected $expression_language;
 
     protected $notes;
     protected $flightStart;
@@ -122,6 +124,17 @@ class Campaign
     public function setCategoryExclusivity($categoryExclusivity)
     {
         $this->category_exclusivity = $categoryExclusivity;
+        return $this;
+    }
+
+    public function getExpression()
+    {
+        return $this->expression;
+    }
+
+    public function setExpression($expression)
+    {
+        $this->expression = $expression;
         return $this;
     }
 
