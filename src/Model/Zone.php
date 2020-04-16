@@ -10,6 +10,9 @@ class Zone
     
     protected $width;
     protected $height;
+
+    protected $criteria = [];
+    use PropertyTrait;
     
     public function getId()
     {
@@ -66,4 +69,15 @@ class Zone
         $this->comment = $comment;
         return $this;
     }
+
+    public function addCriterion(Criterion $criterion)
+    {
+        $this->criteria[] = $criterion;
+    }
+
+    public function getCriteria()
+    {
+        return $this->criteria;
+    }
+
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Adlib\Model;
+namespace AdLib\Model;
 
 class Slot
 {

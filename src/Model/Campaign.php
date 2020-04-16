@@ -38,6 +38,8 @@ class Campaign
 
     protected $excluder = null;
 
+    use MetadataTrait;
+
     public function getId()
     {
         return $this->id;

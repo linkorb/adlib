@@ -15,6 +15,8 @@ class Creative
     protected $height;
     */
 
+    use MetadataTrait;
+
     public function getName()
     {
         return $this->name;

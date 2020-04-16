@@ -17,32 +17,45 @@ class PropertyCampaignFilter implements CampaignFilterInterface
         $stamp = $request->getTimestamp();
 
         $match = true;
+        $properties = array_merge_recursive(
+            $request->getProperties(),
+            $slot->getZone()->getProperties()
+        );
+
+        // Check campaign criteria
         foreach ($campaign->getCriteria() as $criterion) {
-            if (!$this->checkCriterion($criterion, $request)) {
+            if (!$this->checkCriterion($criterion, $properties)) {
+                $match = false;
+            }
+        }
+        
+        // Check zone criteria
+        foreach ($slot->getZone()->getCriteria() as $criterion) {
+            if (!$this->checkCriterion($criterion, $properties)) {
                 $match = false;
             }
         }
         return $match;
     }
 
-    protected function checkCriterion(Criterion $criterion, Request $request)
+    protected function checkCriterion(Criterion $criterion, $properties)
     {
         $key = $criterion->getKey();
-        if (!$request->hasProperty($key)) {
+        if (!isset($properties[$key])) {
             return false;
         }
-        $requestValue = $request->getProperty($key);
+        $propertyValue = $properties[$key];
 
-        $values = $criterion->getValue();
-        if (!is_array($values)) {
-            $values = [$values];
+        $criterionValues = $criterion->getValue();
+        if (!is_array($criterionValues)) {
+            $criterionValues = [$criterionValues];
         }
 
         $match = false;
-        foreach ($values as $value) {
+        foreach ($criterionValues as $criterionValue) {
             switch (strtolower($criterion->getOperator())) {
                 case 'equals':
-                    if ($requestValue == $value) {
+                    if ($propertyValue == $criterionValue) {
                         $match = true;
                     }
                     break;

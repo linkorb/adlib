@@ -96,4 +96,59 @@ class Request
         return true; // available
     }
 
+    public static function unserializeRequest(Network $network, array $config): Request
+    {
+        $request = new Request();
+        $request->setSessionId($config['session'] ?? null);
+        $request->setTimestamp(time());
+
+        foreach (($config['properties'] ?? []) as $k=>$v) {
+            $request->setProperty($k, $v);
+        }
+
+        foreach (($config['slots'] ?? []) as $slotId => $slotZoneId) {
+            $slot = new Slot();
+            $slot->setId($slotId);
+            if (!$network->hasZone($slotZoneId)) {
+                throw new RuntimeException('Undefined zone-id: ' . $slotZoneId);
+            }
+            $zone = $network->getZone($slotZoneId);
+            $slot->setZone($zone);
+            $request->addSlot($slot);
+        }
+        return $request;
+    }
+
+    public function serializeResponse(): array
+    {
+        $data = [
+            'slots' => []
+        ];
+        foreach ($this->getSlots() as $slot) {
+            $creative = $slot->getCreative();
+            if ($creative) {
+                $zone = $slot->getZone();
+                $campaign = $slot->getCampaign();
+                $data['slots'][$slot->getId()] = [
+                    'id' => $slot->getId(),
+                    'zone' => [
+                        'id' => $zone->getId(),
+                    ],
+                    'creative' => [
+                        'text' => $creative->getText(),
+                        'targetUrl' => $creative->getTargetUrl(),
+                        'imageUrl' => $creative->getUrl(),
+                        'metadata' => $creative->getMetadata(),
+                        'campaign' => [
+                            'id' => $campaign->getId(),
+                            'width' => $campaign->getWidth(),
+                            'height' => $campaign->getHeight(),
+                            'metadata' => $campaign->getMetadata(),
+                        ],
+                    ]
+                ];
+            }
+        }
+        return $data;
+    }
 }

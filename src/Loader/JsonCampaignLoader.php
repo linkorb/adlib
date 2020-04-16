@@ -108,6 +108,9 @@ class JsonCampaignLoader
                 $creative->setWidth($cdata['width']);
                 $creative->setHeight($cdata['height']);
                 */
+                foreach (($cdata['metadata'] ?? []) as $k=>$v) {
+                    $creative->setMetadataValue($k, $v);
+                }
                 $campaign->addCreative($creative);
             }
         }
