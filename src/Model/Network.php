@@ -83,7 +83,7 @@ class Network
     public function postFilter($request, $campaigns)
     {
         // Select based on priority, then use campaignselector for campaigns with same priority
-        for ($priority = 0; $priority < 16; $priority++) {
+        for ($priority = 0; $priority <= 16; $priority++) {
             $prioCampaigns = [];
             foreach ($campaigns as $campaign) {
                 if ($campaign->getPriority()==$priority) {
