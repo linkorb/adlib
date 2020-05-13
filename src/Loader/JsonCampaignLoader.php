@@ -56,10 +56,14 @@ class JsonCampaignLoader
         $tz = new DateTimeZone($data['flight']['timezone']);
         //exit($data['flight']['start']);
         $date = DateTime::createFromFormat('Y-m-d', $data['flight']['start'], $tz);
-        $campaign->setFlightStart($date->getTimestamp());
+        if ($date) {
+            $campaign->setFlightStart($date->getTimestamp());
+        }
         if ($data['flight']['end']) {
             $date = DateTime::createFromFormat('Y-m-d', $data['flight']['end'], $tz);
-            $campaign->setFlightEnd($date->getTimestamp());
+            if ($date) {
+                $campaign->setFlightEnd($date->getTimestamp());
+            }
         }
         $campaign->setFlightTimezone($data['flight']['timezone']);
 
